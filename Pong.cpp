@@ -1,5 +1,5 @@
 //Функции основного класса
-#include "CrossAndCircle.h"
+#include "Pong.h"
 
 CMain::CMain()
 { 

@@ -1,7 +1,6 @@
 //Main class
 #include "libs.h"
-#include "Controller.h"
-
+#include "SDL_Setup.h"
 class CMain
 {
     private:
