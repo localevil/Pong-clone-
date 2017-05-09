@@ -1,6 +1,6 @@
 //Main file
 #include "libs.h"
-#include "CrossAndCircle.h"
+#include "Pong.h"
 
 int main()
 {
