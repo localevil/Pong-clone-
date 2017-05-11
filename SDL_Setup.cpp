@@ -1,12 +1,12 @@
 //Функции инициализации SDL классов
 #include "SDL_Setup.h"
 
-CSDL_Setup::CSDL_Setup()
+CSDL_Setup::CSDL_Setup(int screan_width, int screan_height )
 {
 	//Инициализация всех SDL класоов
     SDL_Init(SDL_INIT_EVERYTHING);
 	//Создание игрового окна
-     window = SDL_CreateWindow("RPG", 0,0,450,450, SDL_WINDOW_SHOWN);
+     window = SDL_CreateWindow("Pong", 0,0,screan_width,screan_height, SDL_WINDOW_SHOWN);
 	//Проверка наличия окна
     if(window == nullptr)
     {

@@ -12,7 +12,7 @@ class CSDL_Setup
 
     public:
 
-    CSDL_Setup();
+    CSDL_Setup(int screan_width, int screan_height);
     ~CSDL_Setup();
 
     void begin();

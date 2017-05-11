@@ -19,8 +19,9 @@ CImage::CImage(std::string passed_file, int x, int y, int width, int height, SDL
         image_rect.x = x;
         image_rect.y = y;
         image_rect.h = height;
-        image_rect.w = width;
-    
+        image_rect.w = width;	
+    	
+
     }
 //Копирование изображения в рендер
 void CImage::draw()
@@ -28,6 +29,24 @@ void CImage::draw()
     SDL_RenderCopy(ren, image, NULL, &image_rect);
 }
 
+void CImage::setX(int X)
+{
+	image_rect.x = X;
+}
+
+void CImage::setY(int Y)
+{
+	image_rect.y = Y;
+}
+
+int CImage::getX()
+{
+	return image_rect.x;
+}
+int CImage::getY()
+{
+	return image_rect.y;
+}
 CImage::~CImage()
 {
     SDL_DestroyTexture(image);

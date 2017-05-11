@@ -16,5 +16,11 @@ class CImage
     ~CImage();
 
     void draw();
+	
+    	int getX();
+	int getY();
+	
+	void setX(int X);
+	void setY(int Y);
 
 };
