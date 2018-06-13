@@ -1,14 +1,13 @@
 //Инициализация SDL классов
-#include "libs.h"
+#include <SDL2/SDL.h>
 
 class CSDL_Setup
 {
     private:
 
-    SDL_Window *window;
-    SDL_Renderer *renderer;
-
-    SDL_Event *mainEvent;
+    SDL_Window		*m_window;
+    SDL_Renderer	*m_renderer;
+    SDL_Event		*m_mainEvent;
 
     public:
 
@@ -19,9 +18,9 @@ class CSDL_Setup
 
     void end();
 
-    SDL_Event *getMainEvent();
-
-    SDL_Renderer *getRenderer();
+	SDL_Window *getWindow() const;
+    SDL_Event *getMainEvent() const;
+    SDL_Renderer *getRenderer() const;
 
 
 };

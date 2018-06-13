@@ -1,18 +1,18 @@
 //Main file
-#include "libs.h"
 #include "Pong.h"
 
 int main()
 {
+	int width = 1366;
 	//Инициализация основного класса
-	CMain *cmain = new CMain( 600, 600);
+	CMain *cmain = new CMain(width, width/16*9);
 
 	//Запуск основного цикла
-  	cmain->mainLoop();
+	cmain->exec();
 	
 	//Отчистка памяти    
 	delete cmain;
 
-    return 0;
+	return 0;
 }
 

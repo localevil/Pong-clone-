@@ -1,53 +1,39 @@
 //Функции класса текстур
 #include "image.h"
+#include <iostream>
 
-CImage::CImage(std::string passed_file, int x, int y, int width, int height, SDL_Renderer *renderer)
+CImage::CImage(int x, int y, int width, int height, SDL_Renderer *renderer) : m_renderer(renderer)
     {
-	//Присваивание внешнего редера внутренней переменной
-        ren = renderer;
-	
-	//Получение изображения из каталога
-        image = IMG_LoadTexture(ren, passed_file.c_str());
-	
-	//Проверка на отсуцтвие файла	
-	if(image == nullptr)
-       	{
-	       	std::cout << "IMG_LoadTexture Error" << passed_file << IMG_GetError() << std::endl;
-    	}
-	
 	//Предоставление свойств изображению
-        image_rect.x = x;
-        image_rect.y = y;
-        image_rect.h = height;
-        image_rect.w = width;	
-    	
-
+        m_image_rect.x = x;
+        m_image_rect.y = y;
+        m_image_rect.h = height;
+        m_image_rect.w = width;
     }
 //Копирование изображения в рендер
 void CImage::draw()
-{
-    SDL_RenderCopy(ren, image, NULL, &image_rect);
+{	
+	SDL_RenderFillRect(m_renderer, &m_image_rect);
 }
 
-void CImage::setX(int X)
+void CImage::setX(int x)
 {
-	image_rect.x = X;
+	m_image_rect.x = x;
 }
 
-void CImage::setY(int Y)
+void CImage::setY(int y)
 {
-	image_rect.y = Y;
+	m_image_rect.y = y;
 }
 
-int CImage::getX()
+int CImage::getX() const
 {
-	return image_rect.x;
+	return m_image_rect.x;
 }
-int CImage::getY()
+int CImage::getY() const
 {
-	return image_rect.y;
+	return m_image_rect.y;
 }
 CImage::~CImage()
 {
-    SDL_DestroyTexture(image);
 }

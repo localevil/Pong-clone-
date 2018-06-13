@@ -1,26 +1,24 @@
 //Создание текстур
-#include "libs.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <string>
 
 class CImage
 {
-    private:
+	private:
+	SDL_Renderer *m_renderer;
+	SDL_Rect m_image_rect;
+	SDL_Surface* m_surface;
+	public:
 
-    SDL_Texture *image;
-    SDL_Rect image_rect;
+	CImage(int x, int y, int width, int height, SDL_Renderer *renderer);
+	~CImage();
 
-    SDL_Renderer *ren;
-
-    public:
-
-    CImage(std::string passed_file, int x, int y, int width, int height, SDL_Renderer *renderer);
-    ~CImage();
-
-    void draw();
+	void draw();
 	
-    	int getX();
-	int getY();
+	int getX() const;
+	int getY() const;
 	
-	void setX(int X);
-	void setY(int Y);
-
+	void setX(int x);
+	void setY(int x);
 };
