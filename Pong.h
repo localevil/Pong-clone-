@@ -5,7 +5,6 @@
 class CMain
 {
 	private:
-		//Переменная выхода
 		bool quit;
 		int m_screenWidth;
 		int m_screenHeight;
@@ -16,10 +15,11 @@ class CMain
 		
 	    CSDL_Setup *csdl_setup;
 	
-		double dx;
-		double dy; 
+		int m_dx;
+		int m_dy; 
+		float m_speed;
 
-	  float timeCheck; 
+		float timeCheck; 
 
 	public:
 		CMain(int screen_width, int screen_height);

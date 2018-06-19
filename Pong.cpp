@@ -1,28 +1,34 @@
 //Функции основного класса
 #include "Pong.h"
 #include <iostream>
+#include <cmath>
 
-CMain::CMain(int screenWidth, int screenHeight) : m_screenWidth(screenWidth - 150), m_screenHeight(screenHeight - 150)
+CMain::CMain(int screenWidth, int screenHeight) : 
+		m_screenWidth(screenWidth), 
+		m_screenHeight(screenHeight),
+		m_speed(3)
 { 
 	csdl_setup = new CSDL_Setup(m_screenWidth, m_screenHeight);
 	
 	boll = new CImage(m_screenWidth/2-12.5, m_screenHeight/2-12.5, 25, 25, csdl_setup->getRenderer());
 	
 	rightPlayer = new CImage(10, m_screenHeight/2-50, 25, 100, csdl_setup->getRenderer());
-
-	dx = 1;
-	dy = 1;	
 }
-void setWayToBoll(int dx, int dy)
+
+void setWayToBoll(int* dx, int* dy, float* speed)
 {
+		int angle = 0;
 		srand(time(NULL));
-		dx = (-2) + rand() % 4;
-		dy = (-2) + rand() % 4;
+		angle = rand() % 360;
+		*dx = *speed * std::cos(angle);
+		*dy = *speed * std::sin(angle);
+		if(*dx == 0)
+			*dx = 1;
 }
 //Главный цикл
 void CMain::exec()
 {
-	setWayToBoll(dx, dy);
+	setWayToBoll(&m_dx, &m_dy, &m_speed);
 
 	while(!quit && csdl_setup->getMainEvent()->type != SDL_QUIT)
 	{
@@ -46,7 +52,7 @@ void CMain::exec()
 				}
 				case SDLK_DOWN:
 				{
-					if(rightPlayer->getY() < m_screenHeight)
+					if(rightPlayer->getY() < m_screenHeight - 100)
 					{
 						rightPlayer->setY(rightPlayer->getY()+5);
 						break;
@@ -63,22 +69,22 @@ void CMain::exec()
 			{
 				boll->setX(m_screenWidth/2-12.5);
 				boll->setY(m_screenHeight/2-12.5);
-				setWayToBoll(dx, dy);
+				m_speed += 0.1;
+				setWayToBoll(&m_dx, &m_dy, &m_speed);
 			}
 
-			if(boll->getY() < 5 || boll->getY() > m_screenHeight)  
+			if(boll->getY() < 5 || boll->getY() > m_screenHeight - 5)  
 			{
-				dy = -dy;
+				m_dy = -m_dy;
 			}
 
-			if(abs(boll->getY() - rightPlayer->getY()) < 50 && boll->getX() < 25)
+			if(abs(boll->getY() - rightPlayer->getY()) < 70 && boll->getX() < 30)
 			{
-				dx = -dx;
-				dy = -dy;
+				m_dx = -m_dx;
 			}
 
-			boll->setX(boll->getX()+dx);
-			boll->setY(boll->getY()+dy);
+			boll->setX(boll->getX()+m_dx);
+			boll->setY(boll->getY()+m_dy);
 			
 			rightPlayer->draw();
 
@@ -86,7 +92,7 @@ void CMain::exec()
 	
 			//Отрисовка поля
 			csdl_setup->end();
-			SDL_Delay(3);
+			SDL_Delay(5);
 		}
 
 	}
